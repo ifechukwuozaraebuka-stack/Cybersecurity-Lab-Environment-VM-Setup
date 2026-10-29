@@ -65,8 +65,11 @@ Machines on this network can talk to each other and reach the internet. Nothing 
 
 5. **Checked the addressing inside Kali.** The connection is on Automatic (DHCP), and `8.8.8.8` is added as an extra DNS server.
 
-6. 
+6. ![image alt](05-kali-dhcp-settings.png)
+
 7. **Ran my checks**.
+
+
 
 ## What I learnt While setting it up
 
