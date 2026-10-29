@@ -1,14 +1,12 @@
-# My Kali Linux Pentest Lab on VirtualBox
+# Cybersecurity Lab Environment VM Setup
 
-This is the first lab of my Cybersecurity Internship at Networkwalks (25 October to 22 November 2026), guided by my instructor Waqas Karim, CCIE. The goal of the lab is a safe, isolated place to practise scanning, traffic capture and other security work. This repo documents how I built it: one Kali Linux machine on its own private network, with room to add target machines later.
+This is the first lab of my Cybersecurity Internship at Networkwalks, guided by my instructor Waqas Karim, CCIE. The goal of the lab is a safe, isolated place to practise security works. This repo documents how I built it; one Kali Linux machine on its own private network, with room to add target machines later.
 
-I'm a Computer Science student at the Federal University of Technology Owerri, working toward a SOC Analyst role.
-
-## The lab at a glance
+## Laboratory Overview
 
 | Item | Value |
 |---|---|
-| Host | Windows 10 Pro, Intel Core i7 (4 cores), 16 GB RAM |
+| Host | Windows 10 Pro, Intel Core i7 (2 cores), 16 GB RAM |
 | Hypervisor | Oracle VirtualBox 7.2.22 |
 | Guest | Kali Linux 2026.2 (rolling), Xfce desktop |
 | VM name | `KALI-LINUX` |
@@ -23,7 +21,7 @@ My Windows 10 host
 └── VirtualBox
     └── NAT Network "NatNetwork1"       10.0.0.0/24
         ├── KALI-LINUX (attacker)       10.0.0.3, built in this project
-        └── target VMs                  to be added in later projects
+        └── target VMs                  We didn't target anything yet, just to setup
             │
             └── traffic going out is NATed through the host to the internet
 ```
@@ -55,23 +53,23 @@ Machines on this network can talk to each other and reach the internet. Nothing 
 3. **Checked virtualization.** Under System > Acceleration, hardware virtualization and Nested Paging were enabled. If a VM refuses to start, VT-x is usually switched off in the BIOS.
 4. **Connected Kali to the lab network.** Settings > Network > Adapter 1 > Attached to NAT Network > `NatNetwork1`.
 5. **Checked the addressing inside Kali.** The connection is on Automatic (DHCP), and `8.8.8.8` is added as an extra DNS server.
-6. **Ran my checks** (below).
+6. **Ran my checks**.
 
-## Why I set it up this way
+## What I learnt While setting it up
 
 **NAT Network, not plain NAT.** Think of plain NAT as everyone living in their own locked house with a private door to the road: they can go out, but they cannot visit each other. A NAT Network is like a gated estate. Everyone inside can visit each other, residents can go out through the gate, and strangers on the road cannot just walk in. A lab with several machines needs the estate.
 
-**Not bridged.** Bridged mode puts my lab machines straight onto the real network. I do not want my scans anywhere near devices I do not own.
+**Not bridged.** Bridged mode puts my lab machines straight onto the real network. I do not want my scans anywhere near devices I do not own except legally authorised by the owner.
 
-**Not host-only.** Host-only has no internet, which makes updating Kali and installing tools a pain.
+**Not host-only.** Host-only has no internet, which makes updating Kali and installing tools a hard and a pain.
 
 **DHCP instead of a fixed address.** Less to set up. The downside is that the address can change, so I check `ip a` before pointing a tool at a machine instead of trusting an old note.
 
 **Promiscuous mode on Deny.** The adapter only needs its own traffic for now. I will switch it to `Allow VMs` when I start capturing traffic between machines in Wireshark.
 
-**8 GB of RAM.** My host has 16 GB, so I gave Kali half. Kali does not need that much on its own, so if I run several target VMs at the same time I may have to bring it down.
+**8 GB of RAM.** My host has 16 GB, so I gave Kali half.
 
-## Does it work?
+## Verifying the connection 
 
 Everything below was run inside Kali.
 
@@ -103,33 +101,27 @@ rtt min/avg/max/mdev = 44.938/75.324/105.711/30.386 ms
 My first NAT Network, `NatNetwork`, came out as `10.0.2.0/24` instead of `10.0.0.0/24`. I deleted it and created `NatNetwork1` with the right range. The lesson was that the VM's network adapter does not follow the change. It still pointed at the old name until I selected `NatNetwork1` again.
 
 **2. I labelled the VM as Ubuntu instead of Debian.**
-VirtualBox showed Kali as "Ubuntu (64-bit)" because I picked the wrong OS type. I fixed it under Settings > General (OS Distribution: Debian, OS Version: Debian (64-bit)) with the VM powered off. I had made the same mistake on my earlier VMs, so I went back and corrected those too. It mostly changes the label and VirtualBox's default hardware settings, but a lab should describe what is really installed.
+VirtualBox showed Kali as "Ubuntu (64-bit)" because I picked the wrong OS type. I fixed it under Settings > General (OS Distribution: Debian, OS Version: Debian (64-bit)) with the VM powered off. I had made the same mistake on my earlier VMs, so I went back and corrected those too. It mostly changes the label and VirtualBox's default hardware settings.
 
-## What's next
+## Security & Ethical Use Only
 
-- Check DNS with `nslookup kali.org` and confirm Nmap with `nmap --version`, then add both to the table above.
-- Take a properly named baseline snapshot and test restoring it.
-- Add a deliberately vulnerable target to the same network (OWASP BWA is already in my VirtualBox library) and make sure Kali can reach it.
-- Run my first Nmap scan against it and write it up as its own project.
+This lab is only for systems I own or have written permission to test. Nothing in it should be pointed at anything else, strictly for education purposes only.
 
-## Screenshots
 
-| File | Shows |
-|---|---|
-| `images/01-kali-desktop.png` | Kali running in VirtualBox |
-| `images/02-nat-network.png` | The NAT Network settings |
-| `images/03-vm-network-adapter.png` | The VM adapter attached to `NatNetwork1` |
-| `images/04-vm-general-acceleration.png` | Debian (64-bit) type and hardware virtualization |
-| `images/05-kali-dhcp-settings.png` | NetworkManager IPv4 set to DHCP with extra DNS |
-| `images/06-verification-terminal.png` | OS version, address, route and ping results |
+## Tools & Resources 
+virtualbox: https://virtualbox.org
 
-## Ethical use
+Kali Linux: https://kali.org
 
-This lab is only for systems I own or have written permission to test. Nothing in it should be pointed at anything else.
+## Author
+Ozaraebuka Ifechukwu Divine 
+Cybersecurity Professional B084
+
+LinkedIn: https://www.linkedin.com/in/ozaraebuka-ifechukwu-7a4b06402
 
 ## About me
 
-I'm Buka, a Computer Science student at FUTO building the hands-on side of a SOC Analyst path, one documented project at a time.
+I'm Buka, a Computer Science student at Federal University of Technology Owerri, Nigeria; building the hands-on side of a SOC Analyst path, one documented project at a time.
 
 - **Program:** Cybersecurity Internship, Networkwalks IT Solutions & Training
 - **Instructor:** Waqas Karim, CCIE
