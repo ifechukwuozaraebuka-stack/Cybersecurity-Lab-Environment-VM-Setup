@@ -57,13 +57,16 @@ Machines on this network can talk to each other and reach the internet. Nothing 
 
 3. **Checked virtualization.** Under System > Acceleration, hardware virtualization and Nested Paging were enabled. If a VM refuses to start, VT-x is usually switched off in the BIOS.
 
-4. 
-5. **Connected Kali to the lab network.** Settings > Network > Adapter 1 > Attached to NAT Network > `NatNetwork1`.
+![image alt](04-vm-general-acceleration.png)
+
+4. **Connected Kali to the lab network.** Settings > Network > Adapter 1 > Attached to NAT Network > `NatNetwork1`.
 
 ![image alt](03-vm-network-adapter.png)
 
 5. **Checked the addressing inside Kali.** The connection is on Automatic (DHCP), and `8.8.8.8` is added as an extra DNS server.
-6. **Ran my checks**.
+
+6. 
+7. **Ran my checks**.
 
 ## What I learnt While setting it up
 
