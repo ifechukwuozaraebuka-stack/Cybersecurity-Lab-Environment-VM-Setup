@@ -95,7 +95,8 @@ $ ping -c 2 8.8.8.8
 2 packets transmitted, 2 received, 0% packet loss, time 1007ms
 rtt min/avg/max/mdev = 44.938/75.324/105.711/30.386 ms
 ```
-![image alt](06-verification-terminal.png)
+
+a![image alt](06-verification-terminal.png)
 ## What went wrong
 
 **1. I created the NAT Network with the wrong prefix.**
