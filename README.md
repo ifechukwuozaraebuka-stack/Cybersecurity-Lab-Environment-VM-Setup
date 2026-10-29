@@ -1,4 +1,5 @@
 # Cybersecurity Lab Environment VM Setup
+![image alt]()
 
 This is the first lab of my Cybersecurity Internship at Networkwalks, guided by my instructor Waqas Karim, CCIE. The goal of the lab is a safe, isolated place to practise security works. This repo documents how I built it; one Kali Linux machine on its own private network, with room to add target machines later.
 
