@@ -130,6 +130,8 @@ virtualbox: https://virtualbox.org
 
 Kali Linux: https://kali.org
 
+7-zip: https://7-zip.org
+
 ## Author
 Ozaraebuka Ifechukwu Divine 
 Cybersecurity Professional B084
