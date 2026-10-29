@@ -50,7 +50,12 @@ Machines on this network can talk to each other and reach the internet. Nothing 
 ## How I built it
 
 1. **Created the NAT Network.** In VirtualBox: File > Tools > Network > NAT Networks > Create. Name `NatNetwork1`, prefix `10.0.0.0/24`, DHCP on, IPv6 off.
+
+![image alt](02-nat-network.png)
+
 2. **Created the VM.** I already had a Linux virtual machine file from earlier work, so instead of installing Kali from an ISO I reused that same file to create a new VM called `KALI-LINUX`. I set the type to Linux / Debian (64-bit) and gave it 8192 MB of RAM.
+
+
 3. **Checked virtualization.** Under System > Acceleration, hardware virtualization and Nested Paging were enabled. If a VM refuses to start, VT-x is usually switched off in the BIOS.
 4. **Connected Kali to the lab network.** Settings > Network > Adapter 1 > Attached to NAT Network > `NatNetwork1`.
 5. **Checked the addressing inside Kali.** The connection is on Automatic (DHCP), and `8.8.8.8` is added as an extra DNS server.
